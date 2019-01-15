@@ -6,8 +6,8 @@
 2. 安装淘宝镜像：在命令行输入 `npm install -g cnpm --registry=https://registry.npm.taobao.org`
 3. 安装 hjk-cli：在命令行输入 `cnpm install -g hjk-cli`
 4. 初始化项目： `hjk init your project name`
-5. 按照提示启动系统
-   PS：为了避免端口号冲突，默认启动端口号：9527
+
+  PS：为了避免端口号冲突，默认启动端口号：9527
 
 ## 项目结构
 ```
