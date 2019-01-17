@@ -5,7 +5,7 @@
 1. 首先需要先安装 node 环境, win/macOS 登录 nodejs.org 下载对应包安装, 安装后在命令行输入 `node -v`提示出版本号之后表示安装成功
 2. 安装淘宝镜像：在命令行输入 `npm install -g cnpm --registry=https://registry.npm.taobao.org`
 3. 安装 hjk-cli：在命令行输入 `cnpm install -g hjk-cli`
-4. 初始化项目： `hjk init your project name`
+4. 初始化项目： `hjk init your project name` 
 5. cd your project name
 6. npm run serve
    PS：为了避免端口号冲突，默认启动端口号：9527
