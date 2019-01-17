@@ -60,6 +60,21 @@ program
             })
             .resume();
     })
+
+program
+    .command("start")
+    .description("运行开发环境 基于webpack-server")
+    .action(function name() {
+        require("../lib/dev");
+    })
+
+program
+    .command("build")
+    .description("运行生产环境 对项目进行打包")
+    .action(function name() {
+        require("../lib/build");
+    })
+
 program.parse(process.argv);
 
 program.on('--help', () => {
@@ -67,7 +82,9 @@ program.on('--help', () => {
     console.log()
     console.log(chalk.gray('    # create a new project with an official template'))
     console.log('    $ hjk init my-project')
-    console.log()
+    console.log("    $ cd my-project ");
+    console.log("    $ hjk start ");
+    console.log("    $ hjk build ");
 })
 
 
