@@ -126,7 +126,8 @@ export default {
         return new Promise((resolve, reject) => {
             if (url instanceof Object && url != null) {
                 axios.get(url).then(res => {
-                    resolve(res)
+                    checkStatus(res)
+                    // resolve(res)
                 })
                 return;
             }
@@ -138,7 +139,8 @@ export default {
                     cancel = c
                 })
             }).then(res => {
-                resolve(res)
+                checkStatus(res)
+                // resolve(res)
             })
         })
     },
@@ -155,7 +157,8 @@ export default {
                         cancel = c
                     })
                 }).then(res => {
-                    resolve(res)
+                    checkStatus(res);
+                    // resolve(res)
                 })
                 return;
             }
@@ -168,7 +171,8 @@ export default {
                     cancel = c
                 })
             }).then(res => {
-                resolve(res)
+                // resolve(res)
+                checkStatus(res);
             })
         })
     },
@@ -188,7 +192,8 @@ export default {
                         cancel = c
                     })
                 }).then(res => {
-                    resolve(res)
+                    // resolve(res)
+                    checkStatus(res);
                 })
                 return;
             }
@@ -204,7 +209,8 @@ export default {
                     cancel = c
                 })
             }).then(res => {
-                resolve(res)
+                // resolve(res)
+                checkStatus(res);
             }).catch(err => {
                 reject(err)
             })
