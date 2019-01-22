@@ -83,8 +83,8 @@ program.on('--help', () => {
     console.log(chalk.gray('    # create a new project with an official template'))
     console.log('    $ hjk init my-project')
     console.log("    $ cd my-project ");
-    console.log("    $ hjk start  启动webpack-server");
-    console.log("    $ hjk build  使用webpack build");
+    console.log("    $ hjk start ");
+    console.log("    $ hjk build ");
 })
 
 
