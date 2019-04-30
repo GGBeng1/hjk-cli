@@ -4,10 +4,10 @@ import { Loading } from "element-ui";
 import router from "./router.js";
 import qs from "qs";
 
-let $alert = function(message, title, options) {
+let $alert = function (message, title, options) {
   window.bus.$alert(message, title, options);
 };
-let $msgbox = function(options) {
+let $msgbox = function (options) {
   window.bus.$msgbox(options);
 };
 
@@ -75,19 +75,19 @@ let codeAction = {
   402: ({ config: { url } }) => {
     $alert("无访问权限，路径：" + url, "提示", {
       confirmButtonText: "确定",
-      callback: () => {}
+      callback: () => { }
     });
   },
   403: ({ config: { url } }) => {
     $alert("无访问权限，路径：" + url, "提示", {
       confirmButtonText: "确定",
-      callback: () => {}
+      callback: () => { }
     });
   },
   404: ({ config: { url } }) => {
     $alert("资源不存在，路径：" + url, "提示", {
       confirmButtonText: "确定",
-      callback: () => {}
+      callback: () => { }
     });
   },
   500: ({ data, config: { url } }) => {
@@ -105,7 +105,7 @@ let codeAction = {
   }
 };
 //判断code
-function checkStatus(response) {
+function checkStatus (response) {
   let {
     data,
     config: { url }
@@ -114,7 +114,7 @@ function checkStatus(response) {
     let action = codeAction[data.code];
     if (action) {
       action(response);
-      return new Promise(() => {});
+      return new Promise(() => { });
     }
   }
   return data;
@@ -129,7 +129,7 @@ axios.defaults.headers = {
 axios.defaults.timeout = 10000;
 
 export default {
-  get(url, param) {
+  get (url, param) {
     return new Promise((resolve, reject) => {
       if (url instanceof Object && url != null) {
         axios.get(url).then(res => {
@@ -151,7 +151,7 @@ export default {
     });
   },
   //json格式
-  postJson(url, param, data) {
+  postJson (url, param, data) {
     return new Promise((resolve, reject) => {
       if (url instanceof Object && url != null) {
         axios({
@@ -182,7 +182,7 @@ export default {
       });
     });
   },
-  post(url, data, param) {
+  post (url, data, param) {
     let datas = qs.stringify(data);
     return new Promise((resolve, reject) => {
       if (url instanceof Object && url != null) {

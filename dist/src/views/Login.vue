@@ -1,9 +1,13 @@
 <template>
   <div>login
-    <h-button long type="primary">确定</h-button>
+    <h-button long
+              type="primary">确定</h-button>
     <h-button type="primary">确定</h-button>
-    <h-button type="primary" loading>确定</h-button>
-    <h-tabbars :tabList="list" @handlerTabbar="handlerTabbar" style='margin-top: 10px'></h-tabbars>
+    <h-button type="primary"
+              loading>确定</h-button>
+    <h-tabbars :tabList="list"
+               @handlerTabbar="handlerTabbar"
+               style='margin-top: 10px'></h-tabbars>
   </div>
 </template>
 <script type="text/javascript">
@@ -12,7 +16,7 @@ export default {
   components: {
     HTabbars
   },
-  data() {
+  data () {
     return {
       list: [
         {
@@ -25,11 +29,11 @@ export default {
         }
       ]
     };
-	},
-	methods: {
-		handlerTabbar(item) {
-			console.log(item)
-		}
-	}
+  },
+  methods: {
+    handlerTabbar (item) {
+      console.log(item)
+    }
+  }
 };
 </script>
