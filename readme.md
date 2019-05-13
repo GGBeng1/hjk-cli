@@ -92,7 +92,7 @@ template>
 > ### 方法命名规范
 >
 > - 语义化开发
-> - 以 handle 开头
+> - 以 handler 开头
 
 > ### css命名规范
 >
