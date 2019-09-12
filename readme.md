@@ -2,21 +2,22 @@
 
 ## 首次启动
 
-1. 首先需要先安装 node 环境, win/macOS 登录 nodejs.org 下载对应包安装, 安装后在命令行输入 `node -v`提示出版本号之后表示安装成功
-2. 安装淘宝镜像：在命令行输入 `npm install -g cnpm --registry=https://registry.npm.taobao.org` 或 `https://yarnpkg.com/zh-Hans/` 安装yarn
-3. 安装 hjk-cli：使用cnpm在命令行输入 `cnpm install -g hjk-cli`，使用yarn在命令行输入 `yarn add global hjk-cli`
-4. 初始化项目： `hjk init your project name` 
+1. 首先需要先安装 node 环境, win/macOS 登录 nodejs.org 下载对应包安装, 安装后在命令行输入 `node -v`提示出版本号之后表示安装成功, 国内建议使用`yarn`, `hjk-cli`优先使用的也是`yarn`
+2. 登录`https://yarnpkg.com/zh-Hans/` 安装 yarn
+3. 使用 yarn 在命令行输入 `yarn add global hjk-cli`
+4. 初始化项目： `hjk init your project name`
 5. `cd your project name`
 6. 开发环境 `hjk start`
-6. 生产环境 `hjk build`
-    PS：为了避免端口号冲突，默认启动端口号：9527
+7. 生产环境 `hjk build`
+   PS：为了避免端口号冲突，默认启动端口号：9527
 
 ## 项目结构
+
 ```
    ├── public                          静态文件（不参与编译）
    │   ├── index.html                     入口页
    │   └── logo_hjk.ico                   浏览器icon
-   ├── src                             项目源码目录    
+   ├── src                             项目源码目录
    │   ├── main.js                         入口js文件
    │   ├── App.vue                         根组件
    │   ├── components                      公共组件目录
@@ -32,6 +33,7 @@
    ├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息
    └── vue.config.js                   webpack配置
 ```
+
 ## .vue 文件的基本结构
 
 > ### 骨架
@@ -94,10 +96,10 @@ template>
 > - 语义化开发
 > - 以 handler 开头
 
-> ### css命名规范
+> ### css 命名规范
 >
 > - 语义化开发
-> - 嵌套组件坚持使用BEM规范
+> - 嵌套组件坚持使用 BEM 规范
 
 ## 注释规范
 
