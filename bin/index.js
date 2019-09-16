@@ -16,7 +16,7 @@ const path = require('path')
 // 定义版本号以及命令选项
 program
   .allowUnknownOption()
-  .version('1.1.6')
+  .version('1.2.0')
   .description('基于vue2.0的脚手架')
 
 program
