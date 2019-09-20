@@ -17,7 +17,7 @@ const path = require('path')
 program
   .allowUnknownOption()
   .version('1.2.0')
-  .description('基于vue2.0的脚手架')
+  .description('基于vue2.0+ webpack4.0+ 的脚手架')
 
 program
   .command('init <dir>')
