@@ -11,29 +11,6 @@
 7. 生产环境 `hjk build`
    PS：为了避免端口号冲突，默认启动端口号：9527
 
-## 项目结构
-
-```
-   ├── public                          静态文件（不参与编译）
-   │   ├── index.html                     入口页
-   │   └── logo_hjk.ico                   浏览器icon
-   ├── src                             项目源码目录
-   │   ├── main.js                         入口js文件
-   │   ├── App.vue                         根组件
-   │   ├── components                      公共组件目录
-   │   ├── assets                          资源目录，这里的资源会被wabpack构建
-   │   │   ├── css                         公共样式文件目录
-   │   │   ├── js                          公共js文件目录
-   │   │   └── img                         图片存放目录
-   │   ├── route.js                        前端路由
-   │   ├── store.js                        状态存储仓库
-   │   └── views                           页面目录
-   │       ├── login.vue
-   │       └── home.vue
-   ├── package.json                    npm包配置文件，里面定义了项目的npm脚本，依赖包等信息
-   └── vue.config.js                   webpack配置
-```
-
 ## .vue 文件的基本结构
 
 > ### 骨架
