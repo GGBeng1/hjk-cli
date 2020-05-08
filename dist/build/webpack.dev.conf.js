@@ -1,38 +1,39 @@
-"use strict"
-const utils = require("./utils")
-const webpack = require("webpack")
-const config = require("../config")
-const merge = require("webpack-merge")
-const path = require("path")
-const os = require("os")
-const chalk = require("chalk")
-const baseWebpackConfig = require("./webpack.base.conf")
-const CopyWebpackPlugin = require("copy-webpack-plugin")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin")
-const portfinder = require("portfinder")
-const { VueLoaderPlugin } = require("vue-loader")
-const serverQRcode = require("./webpack-server-qrcode")
-const HOST = process.env.HOST
-const PORT = process.env.PORT && Number(process.env.PORT)
+"use strict";
+const utils = require("./utils");
+const webpack = require("webpack");
+const config = require("../config");
+const merge = require("webpack-merge");
+const path = require("path");
+const os = require("os");
+const chalk = require("chalk");
+const OpenBrowserPlugin = require("open-browser-webpack-plugin");
+const baseWebpackConfig = require("./webpack.base.conf");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
+const portfinder = require("portfinder");
+const { VueLoaderPlugin } = require("vue-loader");
+const serverQRcode = require("./webpack-server-qrcode");
+const HOST = process.env.HOST;
+const PORT = process.env.PORT && Number(process.env.PORT);
 
 function getIPAdress() {
-  let interfaces = os.networkInterfaces()
+  let interfaces = os.networkInterfaces();
   for (let devName in interfaces) {
-    let iface = interfaces[devName]
+    let iface = interfaces[devName];
     for (let i = 0; i < iface.length; i++) {
-      let alias = iface[i]
+      let alias = iface[i];
       if (
         alias.family === "IPv4" &&
         alias.address !== "127.0.0.1" &&
         !alias.internal
       ) {
-        return alias.address
+        return alias.address;
       }
     }
   }
 }
-const ip = getIPAdress()
+const ip = getIPAdress();
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: "development",
@@ -61,7 +62,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
-    open: config.dev.autoOpenBrowser,
+    // open: config.dev.autoOpenBrowser,
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
       : false,
@@ -95,29 +96,30 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ]),
     new VueLoaderPlugin()
   ]
-})
+});
 
 module.exports = new Promise((resolve, reject) => {
-  portfinder.basePort = process.env.PORT || config.dev.port
+  portfinder.basePort = process.env.PORT || config.dev.port;
   portfinder.getPort((err, port) => {
     if (err) {
-      reject(err)
+      reject(err);
     } else {
       // publish the new Port, necessary for e2e tests
-      process.env.PORT = port
+      process.env.PORT = port;
       // add port to devServer config
-      devWebpackConfig.devServer.port = port
+      devWebpackConfig.devServer.port = port;
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(
         new serverQRcode(),
+        new OpenBrowserPlugin({
+          url: `http://127.0.0.1:${port}`
+        }),
         new FriendlyErrorsPlugin({
           compilationSuccessInfo: {
             messages: [
               `Your application is running here: 
               ${chalk.cyan("http://" + ip + ":" + port)}
-              ${chalk.cyan(
-                "http://" + devWebpackConfig.devServer.host + ":" + port
-              )}
+              ${chalk.cyan("http://127.0.0.1:" + port)}
               `
             ]
           },
@@ -125,9 +127,9 @@ module.exports = new Promise((resolve, reject) => {
             ? utils.createNotifierCallback()
             : undefined
         })
-      )
+      );
 
-      resolve(devWebpackConfig)
+      resolve(devWebpackConfig);
     }
-  })
-})
+  });
+});
