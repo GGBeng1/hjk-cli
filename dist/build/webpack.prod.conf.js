@@ -114,7 +114,7 @@ if (config.build.productionGzip) {
 
   webpackConfig.plugins.push(
     new CompressionWebpackPlugin({
-      filename: "[path].gz[query]",
+      // filename: "[path][query].gz",
       algorithm: "gzip",
       test: new RegExp(
         "\\.(" + config.build.productionGzipExtensions.join("|") + ")$"
