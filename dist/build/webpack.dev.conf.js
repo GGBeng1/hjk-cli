@@ -10,6 +10,7 @@ const baseWebpackConfig = require("./webpack.base.conf");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
+const OpenBrowserPlugin = require("./open-browser-webpack-plugin");
 const portfinder = require("portfinder");
 const { VueLoaderPlugin } = require("vue-loader");
 const HOST = process.env.HOST;
@@ -62,7 +63,6 @@ let devWebpackConfig = merge(baseWebpackConfig, {
     compress: true,
     host: HOST || config.dev.host,
     port: PORT || config.dev.port,
-    open: true,
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
       : false,
@@ -120,6 +120,11 @@ module.exports = new Promise((resolve, reject) => {
       process.env.PORT = port;
       // add port to devServer config
       devWebpackConfig.devServer.port = port;
+      devWebpackConfig.plugins.push(
+        new OpenBrowserPlugin({
+          url: `http://127.0.0.1:${port}`
+        })
+      )
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(
         new FriendlyErrorsPlugin({

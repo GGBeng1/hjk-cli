@@ -46,7 +46,7 @@
     "inject-loader": "^4.0.1",
     "mini-css-extract-plugin": "^1.6.0",
     "node-notifier": "^9.0.1",
-    "open-browser-webpack-plugin": "^0.0.5",
+    "open": "^8.0.8",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "ora": "^5.4.0",
     "os": "^0.1.1",
