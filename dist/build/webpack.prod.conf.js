@@ -7,11 +7,13 @@ const { merge } = require("webpack-merge")
 const baseWebpackConfig = require("./webpack.base.conf")
 const CopyWebpackPlugin = require("copy-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const OptimizeCSSPlugin = require("optimize-css-assets-webpack-plugin")
+// const OptimizeCSSPlugin = require("optimize-css-assets-webpack-plugin")
+const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const { VueLoaderPlugin } = require("vue-loader")
 // const PurifyCSSPlugin = require("purifycss-webpack")
-const glob = require("glob-all")
+// const glob = require("glob-all")
 
 const env =
   process.env.NODE_ENV === "testing"
@@ -24,19 +26,66 @@ const webpackConfig = merge(baseWebpackConfig, {
     minimize: true,
     splitChunks: {
       cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          chunks: "initial",
-          name: "vendors"
+        // vendors: {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   chunks: "initial",
+        //   name: "vendors"
+        // },
+        // "async-vendors": {
+        //   test: /[\\/]node_modules[\\/]/,
+        //   minChunks: 2,
+        //   chunks: "async",
+        //   name: "async-vendors"
+        // }
+        vueBase: {
+          name: "vueBase",
+          test: (module) => {
+            return /vue|vue-router/.test(module.context)
+          },
+          chunks: "all",
+          priority: 9
         },
-        "async-vendors": {
-          test: /[\\/]node_modules[\\/]/,
-          minChunks: 2,
-          chunks: "async",
-          name: "async-vendors"
+        base: {
+          name: "base",
+          test: (module) => {
+            return /axios/.test(module.context)
+          },
+          chunks: "all",
+          priority: 8,
+          enforce: true
+        },
+        elementUI: {
+          name(module) {
+            let packageName = module.context.match(/[\\/]node_modules[\\/]element-ui[\\/](.*?)([\\/]|$)(.*?)([\\/]|$)/)
+            if (packageName && packageName[3]){
+              packageName ='common'
+            }else {
+              packageName = packageName[1]
+            }
+            return `element-ui.${packageName}`
+          },
+          test:/element-ui/,
+          chunks: "all",
+          priority: 7,
+          enforce: true
         }
       }
     },
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        parallel: true,
+        extractComments: true,
+        terserOptions: {
+          output: { comments: false },
+          compress: {
+            drop_console: true,
+            drop_debugger: true,
+          }
+        }
+      })
+    ],
     runtimeChunk: { name: "runtime" }
   },
   module: {
@@ -67,11 +116,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     // }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
-    new OptimizeCSSPlugin({
-      cssProcessorOptions: config.build.productionSourceMap
-        ? { safe: true, map: { inline: false } }
-        : { safe: true }
-    }),
+    // new OptimizeCSSPlugin({
+    //   cssProcessorOptions: config.build.productionSourceMap
+    //     ? { safe: true, map: { inline: false } }
+    //     : { safe: true }
+    // }),
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
